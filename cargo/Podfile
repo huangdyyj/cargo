@@ -1,0 +1,9 @@
+workspace '../cargo.xcworkspace'
+xcodeproj 'cargo.xcodeproj'
+source 'https://github.com/CocoaPods/Specs.git'
+platform:ios,'8.0'
+
+target 'cargo' do
+  pod 'AMap2DMap' #2D地图SDK (2D和3D不能同时使⽤用)
+  pod 'AMapSearch' #搜索服务SDK
+end
