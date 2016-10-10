@@ -6,10 +6,11 @@
 //  Copyright © 2016 l99. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "HomeViewController.h"
 #import "POIAnnotation.h"
 //#import "PoiDetailViewController.h"
 #import "CommonUtility.h"
+#import "SearchViewController.h"
 
 typedef NS_ENUM(NSInteger, AMapPOISearchType)
 {
@@ -19,13 +20,13 @@ typedef NS_ENUM(NSInteger, AMapPOISearchType)
     AMapPOISearchTypePolyline
 };
 
-@interface ViewController ()
+@interface HomeViewController ()
 
 @property (nonatomic) AMapPOISearchType poiSearchType;
 
 @end
 
-@implementation ViewController
+@implementation HomeViewController
 
 
 
@@ -45,6 +46,12 @@ typedef NS_ENUM(NSInteger, AMapPOISearchType)
         [_locationManager startUpdatingLocation]; //启动位置管理器
     }
 }
+
+- (void)clickSearchBtn {
+    SearchViewController *vc = [[SearchViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:NO];
+}
+
 
 
 
@@ -138,18 +145,18 @@ typedef NS_ENUM(NSInteger, AMapPOISearchType)
 }
 
 /* 根据关键字来搜索POI. */
-- (void)searchPoiByKeyword
+- (void)searchPoiByKeyword:(NSString *)searchKey
 {
     AMapPOIKeywordsSearchRequest *request = [[AMapPOIKeywordsSearchRequest alloc] init];
     
-    request.keywords            = @"北京大学";
-    request.city                = @"北京";
-    //    request.types               = @"高等院校";
+    request.keywords            = searchKey;
+//    request.city                = @"北京";      // wong.todo - 根据当前所在的城市设定该值
+//    request.types               = @"高等院校";
     request.requireExtension    = YES;
     
     /*  搜索SDK 3.2.0 中新增加的功能，只搜索本城市的POI。*/
-    //    request.cityLimit           = YES;
-    //    request.requireSubPOIs      = YES;
+//    request.cityLimit           = YES;
+//    request.requireSubPOIs      = YES;
     
     [self.search AMapPOIKeywordsSearch:request];
 }
@@ -201,7 +208,7 @@ typedef NS_ENUM(NSInteger, AMapPOISearchType)
         }
         case AMapPOISearchTypeKeywords:
         {
-            [self searchPoiByKeyword];
+            [self searchPoiByKeyword:@"北京大学"];
             
             break;
         };
@@ -296,25 +303,64 @@ typedef NS_ENUM(NSInteger, AMapPOISearchType)
     _locationManager.distanceFilter = 1.0f;//设置距离筛选器
     [_locationManager requestWhenInUseAuthorization];
     [_locationManager startUpdatingLocation];
+    
+    CGRect foo;
+    
+    // topView
+    {
+        foo.origin.x = foo.origin.y = 0;
+        foo.size.width = self.view.frame.size.width;
+        foo.size.height = 64;
+        UIView *topView = [[UIView alloc] initWithFrame:foo];
+        topView.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:topView];
+        
+        foo = self.mapView.frame;
+        foo.origin.y = CGRectGetMaxY(topView.frame);
+        self.mapView.frame = foo;
+        
+        
+        // subviews
+        UIEdgeInsets inset = UIEdgeInsetsMake(25, 10, 5, 10);
+        foo.origin.x = 10;
+        foo.origin.y = 5 + 20;
+        foo.size.width = topView.frame.size.width - inset.left - inset.right;
+        foo.size.height = topView.frame.size.height - inset.top - inset.bottom;
+        UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        searchBtn.frame = foo;
+        searchBtn.layer.cornerRadius = 3;
+        searchBtn.backgroundColor = [UIColor lightGrayColor];
+        searchBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
+        [searchBtn setTitle:@"搜索" forState:UIControlStateNormal];
+        [searchBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [searchBtn setContentEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
+        [searchBtn setContentMode:UIViewContentModeLeft];
+        [searchBtn addTarget:self action:@selector(clickSearchBtn) forControlEvents:UIControlEventTouchUpInside];
+        [topView addSubview:searchBtn];
+    }
+    
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBar.barStyle    = UIBarStyleBlack;
-    self.navigationController.navigationBar.translucent = NO;
-    
-    self.navigationController.toolbar.barStyle      = UIBarStyleBlack;
-    self.navigationController.toolbar.translucent   = YES;
-    [self.navigationController setToolbarHidden:NO animated:animated];
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//    self.navigationController.navigationBar.barStyle    = UIBarStyleBlack;
+//    self.navigationController.navigationBar.translucent = NO;
+//    
+//    self.navigationController.toolbar.barStyle      = UIBarStyleBlack;
+//    self.navigationController.toolbar.translucent   = YES;
+//    [self.navigationController setToolbarHidden:NO animated:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    [self.navigationController setToolbarHidden:YES animated:animated];
+//    [self.navigationController setToolbarHidden:YES animated:animated];
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 
@@ -346,6 +392,18 @@ typedef NS_ENUM(NSInteger, AMapPOISearchType)
        didFailWithError: (NSError *)error {
     NSLog(@"location manager did fail error: %ld , %@" , error.code , error.localizedDescription);
 }
+
+
+
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self searchPoiByKeyword:textField.text];
+    
+    return YES;
+}
+
 
 
 

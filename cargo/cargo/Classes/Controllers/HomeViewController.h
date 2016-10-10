@@ -8,7 +8,7 @@
 
 #import "BaseMapViewController.h"
 
-@interface ViewController : BaseMapViewController <CLLocationManagerDelegate> {
+@interface HomeViewController : BaseMapViewController <CLLocationManagerDelegate> {
     CLLocationManager *_locationManager;
     BOOL _firstGetLocation;
 }

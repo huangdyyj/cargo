@@ -143,7 +143,7 @@
     
     if (_isFirstAppear)
     {
-        self.mapView.visibleMapRect = MAMapRectMake(220880104, 101476980, 272496, 466656);
+        //self.mapView.visibleMapRect = MAMapRectMake(220880104, 101476980, 272496, 466656);
         _isFirstAppear = NO;
         
         [self hookAction];

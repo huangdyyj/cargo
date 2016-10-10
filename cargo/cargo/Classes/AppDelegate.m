@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "APIKey.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
-#import "ViewController.h"
+#import "HomeViewController.h"
 
 
 
@@ -48,7 +48,7 @@
     
     [self configureAPIKey];
     
-    ViewController *viewController = [[ViewController alloc] init];
+    HomeViewController *viewController = [[HomeViewController alloc] init];
     
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
     
