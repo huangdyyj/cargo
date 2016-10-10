@@ -29,7 +29,6 @@
 		C3C534011DAB9352005D8BEF /* ReGeocodeAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C533F41DAB9352005D8BEF /* ReGeocodeAnnotation.m */; };
 		C3C534071DAB93BF005D8BEF /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C534061DAB93BF005D8BEF /* CommonUtility.m */; };
 		C3C5340A1DAB9E09005D8BEF /* CGDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C534091DAB9E09005D8BEF /* CGDataManager.m */; };
-		C3C5340D1DABA749005D8BEF /* a.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C5340C1DABA749005D8BEF /* a.m */; };
 		E42C0A600D0D93304308C2D1 /* libPods-cargo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7DB96D505FD83571F6AAF8 /* libPods-cargo.a */; };
 /* End PBXBuildFile section */
 
@@ -79,8 +78,6 @@
 		C3C534061DAB93BF005D8BEF /* CommonUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtility.m; sourceTree = "<group>"; };
 		C3C534081DAB9E09005D8BEF /* CGDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGDataManager.h; sourceTree = "<group>"; };
 		C3C534091DAB9E09005D8BEF /* CGDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGDataManager.m; sourceTree = "<group>"; };
-		C3C5340B1DABA749005D8BEF /* a.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = a.h; sourceTree = "<group>"; };
-		C3C5340C1DABA749005D8BEF /* a.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = a.m; sourceTree = "<group>"; };
 		F464AE81ABC7C3F716DCAC05 /* Pods-cargo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cargo.release.xcconfig"; path = "Pods/Target Support Files/Pods-cargo/Pods-cargo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,8 +158,6 @@
 				C3C534041DAB93BF005D8BEF /* Utility */,
 				C3C533DA1DAB9352005D8BEF /* Models */,
 				C3C533CF1DAB9298005D8BEF /* Controllers */,
-				C3C5340B1DABA749005D8BEF /* a.h */,
-				C3C5340C1DABA749005D8BEF /* a.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -360,7 +355,6 @@
 				C3C5340A1DAB9E09005D8BEF /* CGDataManager.m in Sources */,
 				C3C533D21DAB9298005D8BEF /* AppDelegate.m in Sources */,
 				C3C533FC1DAB9352005D8BEF /* LocalTileOverlay.m in Sources */,
-				C3C5340D1DABA749005D8BEF /* a.m in Sources */,
 				C3C533FF1DAB9352005D8BEF /* MANaviRoute.m in Sources */,
 				C3C533FB1DAB9352005D8BEF /* LineDashPolyline.m in Sources */,
 				C3C533F91DAB9352005D8BEF /* CustomOverlay.m in Sources */,
